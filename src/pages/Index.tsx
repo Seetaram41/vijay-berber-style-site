@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Menu, Star, Clock, Phone, Calendar, User, Camera, Check, WhatsApp } from 'lucide-react';
+import { Menu, Star, Clock, Phone, Calendar, User, Camera, Check, MessageCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
@@ -395,7 +394,7 @@ const Index = () => {
                   <span>Mon-Sat: 9AM-7PM, Sun: 10AM-5PM</span>
                 </div>
                 <div className="flex items-center">
-                  <WhatsApp className="h-5 w-5 text-berber-terracotta mr-3" />
+                  <MessageCircle className="h-5 w-5 text-berber-terracotta mr-3" />
                   <span>WhatsApp: +1 (555) 123-4567</span>
                 </div>
               </div>
@@ -405,7 +404,7 @@ const Index = () => {
                   className="bg-green-500 hover:bg-green-600 text-white w-full mb-4"
                   onClick={() => window.open('https://wa.me/15551234567', '_blank')}
                 >
-                  <WhatsApp className="mr-2 h-5 w-5" />
+                  <MessageCircle className="mr-2 h-5 w-5" />
                   WhatsApp Us
                 </Button>
                 <Button 
@@ -458,7 +457,7 @@ const Index = () => {
         className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg animate-float z-40"
         onClick={() => window.open('https://wa.me/15551234567', '_blank')}
       >
-        <WhatsApp className="h-6 w-6" />
+        <MessageCircle className="h-6 w-6" />
       </Button>
     </div>
   );
