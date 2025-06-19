@@ -2,14 +2,23 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Menu, Star, Clock, Phone, Calendar, User, Camera, Check, MessageCircle } from 'lucide-react';
+import { Menu, Star, Clock, Phone, Calendar, User, Camera, Check, MessageCircle, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [currentSlide, setCurrentSlide] = useState(0);
   const { toast } = useToast();
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(sectionId);
+    }
+  };
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -29,6 +38,33 @@ const Index = () => {
       description: "Call us at +1234567890 or WhatsApp for instant booking!",
     });
   };
+
+  // Hero slider images
+  const heroSlides = [
+    {
+      image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&h=600&fit=crop",
+      title: "Traditional Berber Cuts",
+      subtitle: "25 years of expertise"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=800&h=600&fit=crop",
+      title: "Professional Beard Styling",
+      subtitle: "Precision and artistry"
+    },
+    {
+      image: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=800&h=600&fit=crop",
+      title: "Premium Facial Treatments",
+      subtitle: "Luxury experience"
+    }
+  ];
+
+  // Auto-advance slider
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   const services = [
     {
@@ -77,19 +113,22 @@ const Index = () => {
       name: "Ahmed Hassan",
       rating: 5,
       text: "Vijay has been cutting my hair for 10 years. Best Berber hairdresser in the city!",
-      date: "2 weeks ago"
+      date: "2 weeks ago",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
     },
     {
       name: "Sarah Johnson", 
       rating: 5,
       text: "Amazing attention to detail and respect for cultural traditions. Highly recommended!",
-      date: "1 month ago"
+      date: "1 month ago",
+      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
     },
     {
       name: "Mohammed Ali",
       rating: 5,
       text: "Professional service, clean shop, and excellent results every time.",
-      date: "3 weeks ago"
+      date: "3 weeks ago",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
     }
   ];
 
@@ -99,7 +138,17 @@ const Index = () => {
     "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=300",
     "https://images.unsplash.com/photo-1562004760-aceed7bb0fe3?w=300",
     "https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=300",
-    "https://images.unsplash.com/photo-1508243771214-6e95d137426b?w=300"
+    "https://images.unsplash.com/photo-1508243771214-6e95d137426b?w=300",
+    "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=300",
+    "https://images.unsplash.com/photo-1622296089863-eb7c9736e5b8?w=300",
+    "https://images.unsplash.com/photo-1527203561188-dae1bc1df8db?w=300"
+  ];
+
+  const socialLinks = [
+    { icon: Facebook, url: "https://facebook.com/vijayhairdresser", label: "Facebook" },
+    { icon: Instagram, url: "https://instagram.com/vijayhairdresser", label: "Instagram" },
+    { icon: Twitter, url: "https://twitter.com/vijayhairdresser", label: "Twitter" },
+    { icon: Youtube, url: "https://youtube.com/vijayhairdresser", label: "YouTube" }
   ];
 
   return (
@@ -114,13 +163,22 @@ const Index = () => {
             
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-6">
-              {['Home', 'About', 'Services', 'Gallery', 'Reviews', 'Contact'].map((item) => (
+              {[
+                { name: 'Home', id: 'home' },
+                { name: 'About', id: 'about' },
+                { name: 'Services', id: 'services' },
+                { name: 'Gallery', id: 'gallery' },
+                { name: 'Reviews', id: 'reviews' },
+                { name: 'Contact', id: 'contact' }
+              ].map((item) => (
                 <button
-                  key={item}
-                  className="text-foreground hover:text-berber-terracotta transition-colors relative group"
-                  onClick={() => setActiveSection(item.toLowerCase())}
+                  key={item.id}
+                  className={`text-foreground hover:text-berber-terracotta transition-colors relative group ${
+                    activeSection === item.id ? 'text-berber-terracotta' : ''
+                  }`}
+                  onClick={() => scrollToSection(item.id)}
                 >
-                  {item}
+                  {item.name}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-berber-terracotta transition-all group-hover:w-full"></span>
                 </button>
               ))}
@@ -156,16 +214,23 @@ const Index = () => {
           {/* Mobile Menu */}
           {isMenuOpen && (
             <div className="md:hidden mt-4 pb-4 border-t border-border animate-fade-in">
-              {['Home', 'About', 'Services', 'Gallery', 'Reviews', 'Contact'].map((item) => (
+              {[
+                { name: 'Home', id: 'home' },
+                { name: 'About', id: 'about' },
+                { name: 'Services', id: 'services' },
+                { name: 'Gallery', id: 'gallery' },
+                { name: 'Reviews', id: 'reviews' },
+                { name: 'Contact', id: 'contact' }
+              ].map((item) => (
                 <button
-                  key={item}
+                  key={item.id}
                   className="block w-full text-left py-2 text-foreground hover:text-berber-terracotta transition-colors"
                   onClick={() => {
-                    setActiveSection(item.toLowerCase());
+                    scrollToSection(item.id);
                     setIsMenuOpen(false);
                   }}
                 >
-                  {item}
+                  {item.name}
                 </button>
               ))}
             </div>
@@ -173,15 +238,33 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="pt-20 pb-16 berber-pattern">
-        <div className="container mx-auto px-4">
+      {/* Hero Section with Slider */}
+      <section id="home" className="pt-20 pb-16 relative overflow-hidden">
+        <div className="absolute inset-0">
+          {heroSlides.map((slide, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-30' : 'opacity-0'
+              }`}
+            >
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/40"></div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center animate-fade-in">
-            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
               Traditional Berber
               <span className="text-berber-terracotta block">Hair Artistry</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               25 years of excellence in traditional Berber hairdressing, blending cultural heritage with modern techniques
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -197,12 +280,25 @@ const Index = () => {
                 variant="outline" 
                 size="lg"
                 onClick={downloadPriceList}
-                className="border-berber-terracotta text-berber-terracotta hover:bg-berber-terracotta hover:text-white"
+                className="border-white text-white hover:bg-white hover:text-berber-terracotta"
               >
                 📄 Download Price List
               </Button>
             </div>
           </div>
+        </div>
+
+        {/* Slider indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-colors ${
+                index === currentSlide ? 'bg-berber-terracotta' : 'bg-white/50'
+              }`}
+            />
+          ))}
         </div>
       </section>
 
@@ -346,7 +442,11 @@ const Index = () => {
                   </div>
                   <p className="text-muted-foreground mb-4">"{review.text}"</p>
                   <div className="flex items-center">
-                    <User className="h-8 w-8 text-berber-terracotta mr-3" />
+                    <img 
+                      src={review.image}
+                      alt={review.name}
+                      className="h-10 w-10 rounded-full object-cover mr-3"
+                    />
                     <span className="font-semibold">{review.name}</span>
                   </div>
                 </CardContent>
@@ -416,6 +516,24 @@ const Index = () => {
                   Call for Appointment
                 </Button>
               </div>
+
+              {/* Social Links */}
+              <div className="mt-8">
+                <h4 className="font-semibold mb-4">Follow Us</h4>
+                <div className="flex space-x-4">
+                  {socialLinks.map((social, index) => (
+                    <Button
+                      key={index}
+                      variant="outline"
+                      size="sm"
+                      onClick={() => window.open(social.url, '_blank')}
+                      className="hover:bg-berber-terracotta hover:text-white hover:border-berber-terracotta"
+                    >
+                      <social.icon className="h-4 w-4" />
+                    </Button>
+                  ))}
+                </div>
+              </div>
             </div>
             
             <div className="animate-scale-in">
@@ -442,12 +560,25 @@ const Index = () => {
         <div className="container mx-auto px-4 text-center">
           <div className="text-2xl font-bold mb-4">Vijay Hair Dresser</div>
           <p className="text-berber-sand mb-4">Preserving Berber heritage through exceptional hairdressing</p>
-          <div className="flex justify-center space-x-6 text-sm">
+          <div className="flex justify-center space-x-6 text-sm mb-4">
             <span>© 2024 Vijay Hair Dresser</span>
             <span>•</span>
             <span>25 Years of Excellence</span>
             <span>•</span>
             <span>Cultural Heritage</span>
+          </div>
+          <div className="flex justify-center space-x-4">
+            {socialLinks.map((social, index) => (
+              <Button
+                key={index}
+                variant="ghost"
+                size="sm"
+                onClick={() => window.open(social.url, '_blank')}
+                className="text-berber-sand hover:text-white hover:bg-berber-terracotta"
+              >
+                <social.icon className="h-4 w-4" />
+              </Button>
+            ))}
           </div>
         </div>
       </footer>
