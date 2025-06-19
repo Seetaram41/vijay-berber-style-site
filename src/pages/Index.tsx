@@ -4,6 +4,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Menu, Star, Clock, Phone, Calendar, User, Camera, Check, MessageCircle, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import MapSection from '@/components/MapSection';
+import CursorTrail from '@/components/CursorTrail';
 
 const Index = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,6 +19,7 @@ const Index = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setActiveSection(sectionId);
+      setIsMenuOpen(false); // Close mobile menu after clicking
     }
   };
 
@@ -39,7 +42,7 @@ const Index = () => {
     });
   };
 
-  // Hero slider images
+  
   const heroSlides = [
     {
       image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&h=600&fit=crop",
@@ -58,12 +61,32 @@ const Index = () => {
     }
   ];
 
-  // Auto-advance slider
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 4000);
     return () => clearInterval(timer);
+  }, []);
+
+  // Scroll detection for active section
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'about', 'services', 'gallery', 'reviews', 'location', 'contact'];
+      const currentSection = sections.find(section => {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          return rect.top <= 100 && rect.bottom >= 100;
+        }
+        return false;
+      });
+      if (currentSection) {
+        setActiveSection(currentSection);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const services = [
@@ -152,7 +175,9 @@ const Index = () => {
   ];
 
   return (
-    <div className={`min-h-screen bg-background transition-colors duration-300 ${isDarkMode ? 'dark' : ''}`}>
+    <div className={`min-h-screen bg-background transition-colors duration-300 cursor-none ${isDarkMode ? 'dark' : ''}`}>
+      <CursorTrail />
+      
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b">
         <div className="container mx-auto px-4 py-3">
@@ -169,11 +194,12 @@ const Index = () => {
                 { name: 'Services', id: 'services' },
                 { name: 'Gallery', id: 'gallery' },
                 { name: 'Reviews', id: 'reviews' },
+                { name: 'Location', id: 'location' },
                 { name: 'Contact', id: 'contact' }
               ].map((item) => (
                 <button
                   key={item.id}
-                  className={`text-foreground hover:text-berber-terracotta transition-colors relative group ${
+                  className={`text-foreground hover:text-berber-terracotta transition-colors relative group cursor-pointer ${
                     activeSection === item.id ? 'text-berber-terracotta' : ''
                   }`}
                   onClick={() => scrollToSection(item.id)}
@@ -186,7 +212,7 @@ const Index = () => {
                 variant="outline"
                 size="sm"
                 onClick={toggleTheme}
-                className="ml-4"
+                className="ml-4 cursor-pointer"
               >
                 {isDarkMode ? '☀️' : '🌙'}
               </Button>
@@ -198,6 +224,7 @@ const Index = () => {
                 variant="outline"
                 size="sm"
                 onClick={toggleTheme}
+                className="cursor-pointer"
               >
                 {isDarkMode ? '☀️' : '🌙'}
               </Button>
@@ -205,6 +232,7 @@ const Index = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="cursor-pointer"
               >
                 <Menu className="h-5 w-5" />
               </Button>
@@ -220,15 +248,13 @@ const Index = () => {
                 { name: 'Services', id: 'services' },
                 { name: 'Gallery', id: 'gallery' },
                 { name: 'Reviews', id: 'reviews' },
+                { name: 'Location', id: 'location' },
                 { name: 'Contact', id: 'contact' }
               ].map((item) => (
                 <button
                   key={item.id}
-                  className="block w-full text-left py-2 text-foreground hover:text-berber-terracotta transition-colors"
-                  onClick={() => {
-                    scrollToSection(item.id);
-                    setIsMenuOpen(false);
-                  }}
+                  className="block w-full text-left py-2 text-foreground hover:text-berber-terracotta transition-colors cursor-pointer"
+                  onClick={() => scrollToSection(item.id)}
                 >
                   {item.name}
                 </button>
@@ -238,6 +264,8 @@ const Index = () => {
         </div>
       </nav>
 
+      
+      
       {/* Hero Section with Slider */}
       <section id="home" className="pt-20 pb-16 relative overflow-hidden">
         <div className="absolute inset-0">
@@ -270,7 +298,7 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button 
                 size="lg" 
-                className="bg-berber-terracotta hover:bg-berber-desert text-white px-8 py-3"
+                className="bg-berber-terracotta hover:bg-berber-desert text-white px-8 py-3 cursor-pointer"
                 onClick={bookAppointment}
               >
                 <Calendar className="mr-2 h-5 w-5" />
@@ -280,7 +308,7 @@ const Index = () => {
                 variant="outline" 
                 size="lg"
                 onClick={downloadPriceList}
-                className="border-white text-white hover:bg-white hover:text-berber-terracotta"
+                className="border-white text-white hover:bg-white hover:text-berber-terracotta cursor-pointer"
               >
                 📄 Download Price List
               </Button>
@@ -288,13 +316,12 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Slider indicators */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-colors ${
+              className={`w-3 h-3 rounded-full transition-colors cursor-pointer ${
                 index === currentSlide ? 'bg-berber-terracotta' : 'bg-white/50'
               }`}
             />
@@ -304,6 +331,7 @@ const Index = () => {
 
       {/* About Section */}
       <section id="about" className="py-16 bg-card">
+        
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 animate-slide-in-left">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">About Vijay Hair Dresser</h2>
@@ -344,6 +372,7 @@ const Index = () => {
 
       {/* Services Section */}
       <section id="services" className="py-16">
+        
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
@@ -352,7 +381,7 @@ const Index = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => (
-              <Card key={index} className="hover-lift animate-scale-in" style={{animationDelay: `${index * 0.1}s`}}>
+              <Card key={index} className="hover-lift animate-scale-in cursor-pointer" style={{animationDelay: `${index * 0.1}s`}}>
                 <CardContent className="p-0">
                   <img 
                     src={service.image}
@@ -366,7 +395,7 @@ const Index = () => {
                       <Badge variant="secondary" className="bg-berber-sand text-berber-desert">
                         {service.price}
                       </Badge>
-                      <Button size="sm" variant="outline">
+                      <Button size="sm" variant="outline" className="cursor-pointer">
                         Select
                       </Button>
                     </div>
@@ -380,6 +409,7 @@ const Index = () => {
 
       {/* Products Section */}
       <section id="products" className="py-16 bg-card">
+        
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Premium Products We Use</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -404,6 +434,7 @@ const Index = () => {
 
       {/* Gallery Section */}
       <section id="gallery" className="py-16">
+        
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Our Work Gallery</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -426,6 +457,7 @@ const Index = () => {
 
       {/* Reviews Section */}
       <section id="reviews" className="py-16 bg-card">
+        
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Client Reviews</h2>
           <div className="grid md:grid-cols-3 gap-6">
@@ -458,6 +490,7 @@ const Index = () => {
 
       {/* Cultural Roots Section */}
       <section id="cultural" className="py-16 berber-pattern">
+        
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Our Cultural Roots</h2>
@@ -477,8 +510,12 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Map Location Section */}
+      <MapSection />
+
       {/* Contact Section */}
       <section id="contact" className="py-16 bg-card">
+        
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Contact Us</h2>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -501,7 +538,7 @@ const Index = () => {
               
               <div className="mt-8">
                 <Button 
-                  className="bg-green-500 hover:bg-green-600 text-white w-full mb-4"
+                  className="bg-green-500 hover:bg-green-600 text-white w-full mb-4 cursor-pointer"
                   onClick={() => window.open('https://wa.me/15551234567', '_blank')}
                 >
                   <MessageCircle className="mr-2 h-5 w-5" />
@@ -509,7 +546,7 @@ const Index = () => {
                 </Button>
                 <Button 
                   variant="outline" 
-                  className="w-full border-berber-terracotta text-berber-terracotta hover:bg-berber-terracotta hover:text-white"
+                  className="w-full border-berber-terracotta text-berber-terracotta hover:bg-berber-terracotta hover:text-white cursor-pointer"
                   onClick={bookAppointment}
                 >
                   <Phone className="mr-2 h-5 w-5" />
@@ -517,7 +554,6 @@ const Index = () => {
                 </Button>
               </div>
 
-              {/* Social Links */}
               <div className="mt-8">
                 <h4 className="font-semibold mb-4">Follow Us</h4>
                 <div className="flex space-x-4">
@@ -527,7 +563,7 @@ const Index = () => {
                       variant="outline"
                       size="sm"
                       onClick={() => window.open(social.url, '_blank')}
-                      className="hover:bg-berber-terracotta hover:text-white hover:border-berber-terracotta"
+                      className="hover:bg-berber-terracotta hover:text-white hover:border-berber-terracotta cursor-pointer"
                     >
                       <social.icon className="h-4 w-4" />
                     </Button>
@@ -542,7 +578,7 @@ const Index = () => {
                 <p className="text-muted-foreground mb-4">
                   123 Heritage Street<br />
                   Cultural District<br />
-                  City, State 12345
+                  New York, NY 10001
                 </p>
                 <div className="bg-berber-terracotta/10 p-4 rounded border border-berber-terracotta/20">
                   <p className="text-sm text-center">
@@ -557,6 +593,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="bg-berber-desert text-white py-8">
+        
         <div className="container mx-auto px-4 text-center">
           <div className="text-2xl font-bold mb-4">Vijay Hair Dresser</div>
           <p className="text-berber-sand mb-4">Preserving Berber heritage through exceptional hairdressing</p>
@@ -574,7 +611,7 @@ const Index = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => window.open(social.url, '_blank')}
-                className="text-berber-sand hover:text-white hover:bg-berber-terracotta"
+                className="text-berber-sand hover:text-white hover:bg-berber-terracotta cursor-pointer"
               >
                 <social.icon className="h-4 w-4" />
               </Button>
@@ -585,7 +622,7 @@ const Index = () => {
 
       {/* Floating WhatsApp Button */}
       <Button
-        className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg animate-float z-40"
+        className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg animate-float z-40 cursor-pointer"
         onClick={() => window.open('https://wa.me/15551234567', '_blank')}
       >
         <MessageCircle className="h-6 w-6" />

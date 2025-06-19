@@ -95,10 +95,20 @@
 
   body {
     @apply bg-background text-foreground font-['Inter',sans-serif];
+    cursor: none; /* Hide default cursor */
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-['Playfair_Display',serif];
+  }
+
+  /* Custom cursor styles */
+  .cursor-pointer {
+    cursor: none !important;
+  }
+
+  button, a, [role="button"] {
+    cursor: none !important;
   }
 }
 
@@ -126,5 +136,36 @@
   .hover-lift:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Enhanced cursor animations */
+  .cursor-glow {
+    position: relative;
+  }
+
+  .cursor-glow::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(198, 93, 7, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: -1;
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0.1;
+    }
   }
 }
