@@ -31,14 +31,14 @@ const Index = () => {
   const downloadPriceList = () => {
     toast({
       title: "Price List Download",
-      description: "Contact us at +1234567890 to get the latest price list PDF",
+      description: "Contact us at 9425667874 to get the latest price list PDF",
     });
   };
 
   const bookAppointment = () => {
     toast({
       title: "Book Appointment",
-      description: "Call us at +1234567890 or WhatsApp for instant booking!",
+      description: "Call us at 9425667874 or WhatsApp for instant booking!",
     });
   };
 
@@ -92,25 +92,25 @@ const Index = () => {
   const services = [
     {
       name: "Traditional Berber Cut",
-      price: "$35",
+      price: "100RS",
       description: "Classic Berber styling with modern techniques",
       image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400"
     },
     {
       name: "Beard Shaping",
-      price: "$25",
+      price: "50RS",
       description: "Professional beard trimming and styling",
       image: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=400"
     },
     {
       name: "Premium Facial",
-      price: "$45",
+      price: "1000RS-2500RS",
       description: "Deep cleansing with premium products",
       image: "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400"
     },
     {
       name: "Hair Coloring",
-      price: "$50-80",
+      price: "150-400RS",
       description: "Professional coloring with top brands",
       image: "https://images.unsplash.com/photo-1562004760-aceed7bb0fe3?w=400"
     }
@@ -119,35 +119,42 @@ const Index = () => {
   const products = [
     {
       category: "Facial Brands",
-      items: ["L'Oréal Professional", "Schwarzkopf", "Matrix", "Redken"]
+      items: ["VLCC Facial", "Lotus Facial", "O3+ Facial", "Diamond Facial","Nature’s Essence","Bridal Facial"]
     },
     {
       category: "Bleach Brands", 
-      items: ["Wella Blondor", "L'Oréal Quick Blue", "Matrix Light Master"]
+      items: ["Shahnaz Gold Bleach", "O3+ Bleach", "Oxylife Men Bleach"]
     },
     {
       category: "Color Brands",
-      items: ["Goldwell", "Pravana", "Joico", "Clairol Professional"]
+      items: ["Godrej Expert", "Garnier Hair Color", "L’Oréal Paris Hair Color", "Matrix Hair Color"]
     }
   ];
 
   const reviews = [
     {
-      name: "Ahmed Hassan",
+      name: "Deepesh Nagore",
+      rating: 5,
+      text: "Gives best Hair Service in the Bhopal City!",
+      date: "2 weeks ago",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+    },
+    {
+      name: "Roshan chaouhan",
       rating: 5,
       text: "Vijay has been cutting my hair for 10 years. Best Berber hairdresser in the city!",
       date: "2 weeks ago",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
     },
     {
-      name: "Sarah Johnson", 
+      name: "Arpit Chaoudhray", 
       rating: 5,
       text: "Amazing attention to detail and respect for cultural traditions. Highly recommended!",
       date: "1 month ago",
       image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
     },
     {
-      name: "Mohammed Ali",
+      name: "Karan Mehta",
       rating: 5,
       text: "Professional service, clean shop, and excellent results every time.",
       date: "3 weeks ago",
@@ -524,22 +531,24 @@ const Index = () => {
               <div className="space-y-4">
                 <div className="flex items-center">
                   <Phone className="h-5 w-5 text-berber-terracotta mr-3" />
-                  <span>+1 (555) 123-4567</span>
+                  <span>9425667874</span>,  
+                  <span>6263719059</span>,
+                  <span>9752698482</span>
                 </div>
                 <div className="flex items-center">
                   <Clock className="h-5 w-5 text-berber-terracotta mr-3" />
-                  <span>Mon-Sat: 9AM-7PM, Sun: 10AM-5PM</span>
+                  <span>Mon-Sat: 7:00AM-9:30PM, Sun: 7:00AM-11:00PM</span>
                 </div>
                 <div className="flex items-center">
                   <MessageCircle className="h-5 w-5 text-berber-terracotta mr-3" />
-                  <span>WhatsApp: +1 (555) 123-4567</span>
+                  <span>WhatsApp: 9425667874, 6263719059</span>
                 </div>
               </div>
               
               <div className="mt-8">
                 <Button 
                   className="bg-green-500 hover:bg-green-600 text-white w-full mb-4 cursor-pointer"
-                  onClick={() => window.open('https://wa.me/15551234567', '_blank')}
+                  onClick={() => window.open('https://wa.me/9425667874', '_blank')}
                 >
                   <MessageCircle className="mr-2 h-5 w-5" />
                   WhatsApp Us
@@ -576,9 +585,9 @@ const Index = () => {
               <div className="bg-berber-sand/10 p-6 rounded-lg">
                 <h4 className="font-semibold mb-4">Visit Our Shop</h4>
                 <p className="text-muted-foreground mb-4">
-                  123 Heritage Street<br />
-                  Cultural District<br />
-                  New York, NY 10001
+                      Vijay Hair Dresser, BDA Complex<br />
+                      Sector 9A, Saket Nagar,AIIMS Bhopal<br />
+                      Madhya Pradesh, India
                 </p>
                 <div className="bg-berber-terracotta/10 p-4 rounded border border-berber-terracotta/20">
                   <p className="text-sm text-center">
@@ -623,7 +632,7 @@ const Index = () => {
       {/* Floating WhatsApp Button */}
       <Button
         className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg animate-float z-40 cursor-pointer"
-        onClick={() => window.open('https://wa.me/15551234567', '_blank')}
+        onClick={() => window.open('https://wa.me/9425667874', '_blank')}
       >
         <MessageCircle className="h-6 w-6" />
       </Button>

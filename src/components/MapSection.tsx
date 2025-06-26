@@ -28,7 +28,7 @@ const MapSection = () => {
               <CardContent className="p-0">
                 <div className="relative h-80 bg-berber-sand/20">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387191.33750346623!2d-73.97968099999999!3d40.6974881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sus!4v1642784906796!5m2!1sen!2sus"
+                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d261.97024452134!2d77.45561848637277!3d23.208507877932075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c435af70701eb%3A0xe140619ca419e697!2sChaska%20chai!5e0!3m2!1sen!2sin!4v1750950842331!5m2!1sen!2sin" 
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -54,9 +54,9 @@ const MapSection = () => {
                   <div>
                     <h3 className="font-semibold text-lg mb-2">Our Address</h3>
                     <p className="text-muted-foreground">
-                      123 Heritage Street<br />
-                      Cultural District<br />
-                      New York, NY 10001
+                      Vijay Hair Dresser, BDA Complex<br />
+                      Sector 9A, Saket Nagar,AIIMS Bhopal<br />
+                      Madhya Pradesh, India
                     </p>
                   </div>
                 </div>
@@ -72,9 +72,9 @@ const MapSection = () => {
                   <div>
                     <h3 className="font-semibold text-lg mb-2">Opening Hours</h3>
                     <div className="space-y-1 text-muted-foreground">
-                      <p>Monday - Friday: 9:00 AM - 7:00 PM</p>
-                      <p>Saturday: 9:00 AM - 6:00 PM</p>
-                      <p>Sunday: 10:00 AM - 5:00 PM</p>
+                      <p>Monday - Friday: 7:00 AM - 9:30 PM</p>                                           
+                      <p>Saterday: 7:30 AM - 9:00 PM</p>
+                      <p>Sunday: 7:00 AM - 11:00 PM</p>
                     </div>
                   </div>
                 </div>
