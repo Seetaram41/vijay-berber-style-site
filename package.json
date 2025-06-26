@@ -3,7 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "scripts": {
+
+    "homepage": "https://seetaram41.github.io/vijay-berber-style-site",  
+    "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
