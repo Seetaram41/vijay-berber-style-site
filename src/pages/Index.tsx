@@ -46,7 +46,7 @@ const Index = () => {
   const heroSlides = [
     {
       image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=800&h=600&fit=crop",
-      title: "Traditional Berber Cuts",
+      title: "Traditional Barber Cuts",
       subtitle: "25 years of expertise"
     },
     {
@@ -91,9 +91,9 @@ const Index = () => {
 
   const services = [
     {
-      name: "Traditional Berber Cut",
+      name: "Traditional Barber Cut",
       price: "100RS",
-      description: "Classic Berber styling with modern techniques",
+      description: "Classic Barber styling with modern techniques",
       image: "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=400"
     },
     {
@@ -142,7 +142,7 @@ const Index = () => {
     {
       name: "Roshan chaouhan",
       rating: 5,
-      text: "Vijay has been cutting my hair for 10 years. Best Berber hairdresser in the city!",
+      text: "Vijay has been cutting my hair for 10 years. Best Barber hairdresser in the city!",
       date: "2 weeks ago",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
     },
@@ -296,11 +296,11 @@ const Index = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center animate-fade-in">
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              Traditional Berber
+              Traditional Barber
               <span className="text-berber-terracotta block">Hair Artistry</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              25 years of excellence in traditional Berber hairdressing, blending cultural heritage with modern techniques
+              25 years of excellence in traditional Barber hairdressing, blending cultural heritage with modern techniques
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button 
@@ -343,7 +343,7 @@ const Index = () => {
           <div className="text-center mb-12 animate-slide-in-left">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">About Vijay Hair Dresser</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Preserving the art of traditional Berber hairdressing for over two decades
+              Preserving the art of traditional Barber hairdressing for over two decades
             </p>
           </div>
 
@@ -351,7 +351,7 @@ const Index = () => {
             <div className="animate-slide-in-left">
               <h3 className="text-2xl font-semibold mb-4 text-berber-desert">25 Years of Excellence</h3>
               <p className="text-muted-foreground mb-6">
-                Master Vijay began his journey in traditional Berber hairdressing in 1998, learning ancient techniques 
+                Master Vijay began his journey in traditional Barber hairdressing in 1998, learning ancient techniques 
                 passed down through generations. Today, he combines this rich cultural heritage with modern styling 
                 methods to create unique looks that honor tradition while embracing contemporary fashion.
               </p>
@@ -502,16 +502,16 @@ const Index = () => {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Our Cultural Roots</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              The Berber people have a rich tradition of hairdressing that dates back centuries, 
-              representing identity, status, and cultural pride.
+              Barbering has a rich tradition that dates back centuries, 
+              representing identity, style, and community pride.
             </p>
           </div>
           <div className="max-w-4xl mx-auto text-center animate-fade-in">
             <p className="text-lg leading-relaxed text-muted-foreground">
-              In Berber culture, hairdressing is more than just grooming - it's an art form that tells stories 
+              In barbering, hairdressing is more than just grooming - it's an art form that tells stories 
               of heritage, family, and community. Master Vijay honors these traditions while bringing 
               them into the modern world, ensuring that each client receives not just a haircut, 
-              but a connection to this beautiful cultural legacy.
+              but a connection to this beautiful craft.
             </p>
           </div>
         </div>
@@ -591,7 +591,7 @@ const Index = () => {
                 </p>
                 <div className="bg-berber-terracotta/10 p-4 rounded border border-berber-terracotta/20">
                   <p className="text-sm text-center">
-                    "Experience the authentic Berber hairdressing tradition"
+                    "Experience the authentic barbering tradition"
                   </p>
                 </div>
               </div>
@@ -605,7 +605,7 @@ const Index = () => {
         
         <div className="container mx-auto px-4 text-center">
           <div className="text-2xl font-bold mb-4">Vijay Hair Dresser</div>
-          <p className="text-berber-sand mb-4">Preserving Berber heritage through exceptional hairdressing</p>
+          <p className="text-berber-sand mb-4">Preserving barbering heritage through exceptional hairdressing</p>
           <div className="flex justify-center space-x-6 text-sm mb-4">
             <span>© 2024 Vijay Hair Dresser</span>
             <span>•</span>
